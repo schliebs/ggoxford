@@ -1,6 +1,6 @@
 Package: ggoxford
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Producing High-Quality Plots for Publications and Policy Briefings
 Version: 0.1.0
 Author: Marcel Schliebs
 Maintainer: Marcel Schliebs <marcel.schliebs@gmail.com>
@@ -8,4 +8,11 @@ Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
 Encoding: UTF-8
+Depends:
+    ggplot2
+Imports:
+    grid,
+    ggtext,
+    countrycode
 LazyData: true
+RoxygenNote: 7.1.0

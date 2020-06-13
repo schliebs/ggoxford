@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What the Package Does (Title Case) • ggoxford</title>
+<title>Producing High-Quality Plots for Publications and Policy Briefings • ggoxford</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="What the Package Does (Title Case)">
+<script src="pkgdown.js"></script><meta property="og:title" content="Producing High-Quality Plots for Publications and Policy Briefings">
 <meta property="og:description" content="More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -63,6 +63,78 @@
 <div id="ggoxford" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ggoxford" class="anchor"></a>ggoxford</h1></div>
+<p>This is very much work in progress. I apologize for incomplete documentation.</p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>You can install ggoxford from github with:</p>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")</span>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"schliebs/ggoxford"</span>)</pre></div>
+</div>
+<div id="example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example" class="anchor"></a>Example</h2>
+<p>This is a basic example of how to add country flags to bar plots:</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggoxford</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggtext</span>)
+
+<span class="no">wpop2013</span> <span class="kw">&lt;-</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="no"><a href="https://tidyr.tidyverse.org/reference/who.html">population</a></span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">year</span> <span class="kw">==</span> <span class="fl">2013</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">population</span> <span class="kw">&gt;</span> <span class="fl">1e6</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">iso3</span> <span class="kw">=</span> <span class="kw pkg">countrycode</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span>(<span class="no">country</span>,
+                                         <span class="kw">origin</span> <span class="kw">=</span> <span class="st">"country.name.en"</span>,
+                                         <span class="kw">destination</span> <span class="kw">=</span> <span class="st">"iso3c"</span>)
+  )
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">wpop2013</span>,<span class="fl">10</span>)
+<span class="co">#&gt; # A tibble: 10 x 4</span>
+<span class="co">#&gt;    country      year population iso3 </span>
+<span class="co">#&gt;    &lt;chr&gt;       &lt;int&gt;      &lt;int&gt; &lt;chr&gt;</span>
+<span class="co">#&gt;  1 Afghanistan  2013   30551674 AFG  </span>
+<span class="co">#&gt;  2 Albania      2013    3173271 ALB  </span>
+<span class="co">#&gt;  3 Algeria      2013   39208194 DZA  </span>
+<span class="co">#&gt;  4 Angola       2013   21471618 AGO  </span>
+<span class="co">#&gt;  5 Argentina    2013   41446246 ARG  </span>
+<span class="co">#&gt;  6 Armenia      2013    2976566 ARM  </span>
+<span class="co">#&gt;  7 Australia    2013   23342553 AUS  </span>
+<span class="co">#&gt;  8 Austria      2013    8495145 AUT  </span>
+<span class="co">#&gt;  9 Azerbaijan   2013    9413420 AZE  </span>
+<span class="co">#&gt; 10 Bahrain      2013    1332171 BHR</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu">ggplot</span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">wpop2013</span> <span class="kw">%&gt;%</span>  <span class="fu">slice</span>(<span class="fl">1</span>:<span class="fl">10</span>),
+       <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">iso3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">population</span>)) +
+  <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu"><a href="reference/geom_axis_flags.html">geom_axis_flags</a></span>(<span class="kw">breaks</span> <span class="kw">=</span> <span class="no">wpop2013</span>$<span class="no">iso3</span>,
+                  <span class="kw">labels</span> <span class="kw">=</span> <span class="no">wpop2013</span>$<span class="no">country</span>,
+                  <span class="kw">country_icons</span> <span class="kw">=</span> <span class="no">wpop2013</span>$<span class="no">iso3</span>,
+                  <span class="kw">width</span> <span class="kw">=</span> <span class="fl">30</span>,
+                  <span class="kw">lineheight</span> <span class="kw">=</span> <span class="fl">2</span>,
+                  <span class="kw">fontface</span> <span class="kw">=</span> <span class="st">"bold"</span>
+                  )</pre></div>
+<p><img src="README-unnamed-chunk-3-1.png"><!-- --></p>
+<p>Or with a few details added (now for the last 10 countries)</p>
+<div class="sourceCode" id="cb4"><pre class="r">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>)
+
+<span class="fu">ggplot</span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">wpop2013</span> <span class="kw">%&gt;%</span> <span class="fu">sample_n</span>(<span class="fl">10</span>) ,
+       <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">iso3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">population</span>)) +
+  <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>) +
+  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="kw">label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">population</span>/<span class="fl">1e6</span>),<span class="st">"m"</span>)),<span class="kw">vjust</span> <span class="kw">=</span> -<span class="fl">0.25</span>)+
+  <span class="fu">scale_y_continuous</span>(<span class="kw">breaks</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0e6</span>,<span class="fl">80e6</span>,<span class="fl">10e6</span>),
+                     <span class="kw">labels</span> <span class="kw">=</span> <span class="kw pkg">scales</span><span class="kw ns">::</span><span class="fu"><a href="https://scales.r-lib.org//reference/label_number.html">comma</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0e6</span>,<span class="fl">80e6</span>,<span class="fl">10e6</span>))) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu">labs</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="kw">NULL</span>,<span class="kw">y</span> <span class="kw">=</span> <span class="st">"Population"</span>,<span class="kw">title</span> <span class="kw">=</span> <span class="st">"Population in 2013"</span>)+
+  <span class="fu"><a href="reference/geom_axis_flags.html">geom_axis_flags</a></span>(<span class="kw">breaks</span> <span class="kw">=</span> <span class="no">wpop2013</span>$<span class="no">iso3</span>,
+                  <span class="kw">labels</span> <span class="kw">=</span> <span class="no">wpop2013</span>$<span class="no">country</span>,
+                  <span class="kw">country_icons</span> <span class="kw">=</span> <span class="no">wpop2013</span>$<span class="no">iso3</span>,
+                  <span class="kw">width</span> <span class="kw">=</span> <span class="fl">30</span>,
+                  <span class="kw">lineheight</span> <span class="kw">=</span> <span class="fl">2</span>,
+                  <span class="kw">fontface</span> <span class="kw">=</span> <span class="st">"bold"</span>
+                  )</pre></div>
+<p><img src="README-unnamed-chunk-4-1.png"><!-- --></p>
+</div>
 </div>
   </div>
 
@@ -76,7 +148,7 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>The package maintainer <br><small class="roles"> Maintainer </small>  </li>
+<li>Marcel Schliebs <br><small class="roles"> Maintainer </small>  </li>
 </ul>
 </div>
 
@@ -85,7 +157,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by The package maintainer.</p>
+  <p>Developed by Marcel Schliebs.</p>
 </div>
 
 <div class="pkgdown">

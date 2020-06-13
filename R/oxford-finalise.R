@@ -1,9 +1,3 @@
-
-oii_logo <- ("logos/oii.png")
-ox_logo <- ("logos/ox_logo_rect.png")
-shared_logo <- ("logos/shared_logo.png")
-
-
 save_plot <- function (plot_grid, width, height, save_filepath,dpi,scale) {
   grid::grid.draw(plot_grid)
   #save it
@@ -47,11 +41,19 @@ oii_finalise_plot <- function(plot_name,
                               dpi = 1000,
                               scale = 1,
                               #logo_image_path1 = file.path(system.file("data", package = 'bbplot'),"placeholder.png"),
-                              logo_image_path1 = shared_logo,
+                              oii_logo = T,
                               footer_start = 0.80,
-                              upper = 1) {
+                              upper = 1,
+                              fontsize = 14) {
 
-  footer <- create_oii_footer(source_name, logo_image_path1,footer_start)
+  if(oii_logo == T){
+    logo_image_path1 = file.path(path.package("ggoxford"),"extdata/logos/shared_logo.png")
+  }else{
+    logo_image_path1 = file.path(path.package("ggoxford"),"extdata/logos/white_logo.png")
+  }
+
+
+  footer <- create_oii_footer(source_name, logo_image_path1,footer_start,fontsize = fontsize)
 
   #Draw your left-aligned grid
   plot_left_aligned <- left_align(plot_name, c("subtitle", "title", "caption"))

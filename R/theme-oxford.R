@@ -1,13 +1,3 @@
-#oxblue <- '#002147'
-oxblue <- "black"
-oxgold <- '#8D744A'
-oxgold <- '#b38d47'
-oxgold <- '#f5cf47'
-
-oii_logo <- ("logos/oii.png")
-shared_logo <- ("logos/shared_logo.png")
-
-
 #' A precise & pristine [ggplot2] theme with opinionated defaults and an emphasis on typography
 #'
 #' Also has a "dark" / "modern" version for the new RStudio theme
@@ -151,10 +141,6 @@ theme_oxford <- function(base_family="Roboto", base_size = 11.5,
     strip.background = ggplot2::element_rect(fill="white"),
     strip.text = ggplot2::element_text(size  = 22,  hjust = 0)
   )
-
-
-
-
 
   #########
 
