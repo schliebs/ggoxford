@@ -63,7 +63,7 @@ ggplot(data = wpop2013 %>%  slice(1:10),
                   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="references/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
 Or with a few details added (now for the last 10 countries)
 
@@ -88,4 +88,4 @@ ggplot(data = wpop2013 %>% sample_n(10) ,
                   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="references/figures/README-unnamed-chunk-4-1.png" width="100%" />
