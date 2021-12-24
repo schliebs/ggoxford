@@ -8,6 +8,8 @@ geom_axis_flags(
   breaks,
   labels,
   country_icons,
+  axis = "x",
+  icons_only,
   width = 50,
   lineheight = 3,
   fontface = "bold",
@@ -20,6 +22,8 @@ geom_axis_flags(
 \item{labels}{vector of labels to depict}
 
 \item{country_icons}{country for which flag to depict, in capital letter ISO-3 format (e.g. DEU for Germany)}
+
+\item{axis}{"x" or "y", defaults to "x"}
 
 \item{width}{width of the flag, defaults to 50}
 

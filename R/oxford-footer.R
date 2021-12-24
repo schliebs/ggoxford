@@ -12,8 +12,8 @@ create_oii_footer <- function (source_name, logo_image_path1,footer_start,fontsi
                            grid::textGrob(source_name,
                                           x = 0.004, hjust = 0, gp = grid::gpar(fontsize=fontsize,
                                                                                 fontfamily = "Roboto",
-                                                                               # col = oxblue,
-                                                                                col = "black")),
+                                                                                col = oxblue
+                                                                               )),
                            grid::rasterGrob(png::readPNG(logo_image_path1), x = footer_start))
   return(footer)
 

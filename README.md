@@ -57,18 +57,58 @@ ggplot(data = wpop2013 %>%  slice(1:10),
   geom_axis_flags(breaks = wpop2013$iso3,
                   labels = wpop2013$country,
                   country_icons = wpop2013$iso3,
+                  axis = "x",
                   width = 30,
                   lineheight = 2,
                   fontface = "bold"
                   )
 ```
 
-<img src="references/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+Now, the package also supports an early version of a y-axis
+functionality:
+
+``` r
+ggplot(data = wpop2013 %>%  slice(1:5),
+       aes(x = population, y = iso3)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  geom_axis_flags(breaks = wpop2013$iso3,
+                  labels = wpop2013$country,
+                  country_icons = wpop2013$iso3,
+                  axis = "y",
+                  width = 30,
+                  lineheight = 2,
+                  fontface = "bold"
+                  )
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
+Also, the text labels can be disabled via `icon_only = T`:
+
+``` r
+ggplot(data = wpop2013 %>%  slice(1:10),
+       aes(x = population, y = iso3)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  geom_axis_flags(breaks = wpop2013$iso3,
+                  labels = wpop2013$country,
+                  country_icons = wpop2013$iso3,
+                  axis = "y",
+                  icons_only = T,
+                  width = 30,
+                  lineheight = 2,
+                  fontface = "bold"
+)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 Or with a few details added (now for the last 10 countries)
 
 ``` r
-
 set.seed(123)
 
 ggplot(data = wpop2013 %>% sample_n(10) ,
@@ -88,4 +128,4 @@ ggplot(data = wpop2013 %>% sample_n(10) ,
                   )
 ```
 
-<img src="references/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />

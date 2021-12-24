@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "references/figures/README-",
+  fig.path = "man/figures/README-",
   out.width = "100%"
 )
 ```
@@ -56,11 +56,48 @@ ggplot(data = wpop2013 %>%  slice(1:10),
   geom_axis_flags(breaks = wpop2013$iso3,
                   labels = wpop2013$country,
                   country_icons = wpop2013$iso3,
+                  axis = "x",
                   width = 30,
                   lineheight = 2,
                   fontface = "bold"
                   )
 ```
+
+Now, the package also supports an early version of a y-axis functionality: 
+
+```{r,fig.width=10}
+ggplot(data = wpop2013 %>%  slice(1:5),
+       aes(x = population, y = iso3)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  geom_axis_flags(breaks = wpop2013$iso3,
+                  labels = wpop2013$country,
+                  country_icons = wpop2013$iso3,
+                  axis = "y",
+                  width = 30,
+                  lineheight = 2,
+                  fontface = "bold"
+                  )
+```
+
+Also, the text labels can be disabled via `icon_only = T`:
+
+```{r}
+ggplot(data = wpop2013 %>%  slice(1:10),
+       aes(x = population, y = iso3)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  geom_axis_flags(breaks = wpop2013$iso3,
+                  labels = wpop2013$country,
+                  country_icons = wpop2013$iso3,
+                  axis = "y",
+                  icons_only = T,
+                  width = 30,
+                  lineheight = 2,
+                  fontface = "bold"
+)
+```
+
 
 Or with a few details added (now for the last 10 countries)
 

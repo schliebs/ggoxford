@@ -3,7 +3,7 @@
 \docType{data}
 \name{oxgold1}
 \alias{oxgold1}
-\title{Arial Narrow font name R variable aliases}
+\title{xx}
 \format{
 
 }
@@ -11,6 +11,6 @@
 oxgold1
 }
 \description{
-Arial Narrow font name R variable aliases
+xx
 }
 \keyword{datasets}

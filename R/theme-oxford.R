@@ -87,18 +87,18 @@ theme_oxford <- function(base_family="Roboto", base_size = 11.5,
 
   ret <- ggplot2::theme_minimal(base_family=base_family, base_size=base_size)
 
+
   ##########
 
   ret <- ret + theme(
     #Text format:
     #This sets the font, size, type and colour of text for the chart's title
-    plot.title = ggplot2::element_text(family=font,
+    plot.title = ggplot2::element_text(family=base_family,
                                        size=24,
                                        face="bold",
-                                       #color = oxblue,
-                                       color="black"),
+                                       color = oxblue),
     #This sets the font, size, type and colour of text for the chart's subtitle, as well as setting a margin between the title and the subtitle
-    plot.subtitle = ggplot2::element_text(family=font,
+    plot.subtitle = ggplot2::element_text(family=base_family,
                                           size=18,
                                           face = "bold",
                                           color= "#007fc8",#oxblue,
@@ -113,14 +113,14 @@ theme_oxford <- function(base_family="Roboto", base_size = 11.5,
     legend.background = ggplot2::element_blank(),
     legend.title = ggplot2::element_blank(),
     legend.key = ggplot2::element_blank(),
-    legend.text = ggplot2::element_text(family=font,
+    legend.text = ggplot2::element_text(family=base_family,
                                         size=18,
                                         color="black"),
 
     #Axis format
     #This sets the text font, size and colour for the axis test, as well as setting the margins and removes lines and ticks. In some cases, axis lines and axis ticks are things we would want to have in the chart - the cookbook shows examples of how to do so.
     axis.title = ggplot2::element_blank(),
-    axis.text = ggplot2::element_text(family=font,
+    axis.text = ggplot2::element_text(family=base_family,
                                       size=18,
                                       color="black"),
     axis.text.x = ggplot2::element_text(margin=ggplot2::margin(5, b = 10)),
@@ -239,10 +239,4 @@ update_geom_font_defaults <- function(family="Roboto", face="plain", size=3.5,
   update_geom_defaults("label", list(family=family, face=face, size=size, color=color))
 }
 
-#' @rdname ArialNarrow
-#' @md
-#' @title Arial Narrow font name R variable aliases
-#' @description `font_an` == "`Arial Narrow`"
-#' @format length 1 character vector
-#' @export
-font_an <- "Roboto"
+

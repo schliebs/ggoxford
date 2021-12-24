@@ -2,7 +2,6 @@
 
 export(add_axis_icons)
 export(country_colors)
-export(font_an)
 export(geom_axis_flags)
 export(oii_finalise_plot)
 export(oxblue)

@@ -29,6 +29,7 @@ add_axis_icons <- function(breaks,labels,country_icons,logo_icons,width,...){
 #' @param breaks x axis breaks
 #' @param labels vector of labels to depict
 #' @param country_icons country for which flag to depict, in capital letter ISO-3 format (e.g. DEU for Germany)
+#' @param axis "x" or "y", defaults to "x"
 #' @param width width of the flag, defaults to 50
 #' @param lineheight height of the axis label line
 #' @param fontface Font Face for Labels, defaults to "bold"
@@ -66,16 +67,41 @@ add_axis_icons <- function(breaks,labels,country_icons,logo_icons,width,...){
 #'   )
 #'
 #' @export
-geom_axis_flags <- function(breaks,labels,country_icons,width = 50,lineheight = 3,fontface = "bold",...){
+geom_axis_flags <- function(breaks,labels,country_icons,
+                            axis = "x",icons_only = FALSE,
+                            width = 50,lineheight = 3,fontface = "bold",...){
 
-  markdown_labels <-
-    paste0(labels,"\n<br>","<img src='",
-           file.path(path.package("ggoxford"),"extdata/flags",country_icons),".png",
-           "' width='",width,"' />")
 
-  list(
-    scale_x_discrete(breaks = breaks,labels = markdown_labels,...),
-    theme(axis.text.x = ggtext::element_markdown(lineheight = lineheight,
-                                         face = fontface))
-  )
+  if(axis == "x"){
+
+    if(icons_only == T){labels <- ""}
+
+    markdown_labels <-
+      paste0(labels,"\n<br>","<img src='",
+             file.path(path.package("ggoxford"),"extdata/flags",country_icons),".png",
+             "' width='",width,"' />")
+
+    list(
+      scale_x_discrete(breaks = breaks,labels = markdown_labels,...),
+      theme(axis.text.x = ggtext::element_markdown(lineheight = lineheight,
+                                                   face = fontface))
+    )
+
+  }else if(axis == "y"){
+
+    if(icons_only == T){labels <- ""}
+
+    markdown_labels <-
+      paste0(labels,"<br>",
+             "<img src='",
+             file.path(path.package("ggoxford"),"extdata/flags",country_icons),".png",
+             "' width='",width,"' />")
+
+    list(
+      scale_y_discrete(breaks = breaks,labels = markdown_labels,...),
+      theme(axis.text.y = ggtext::element_markdown(lineheight = lineheight,
+                                                   face = fontface))
+    )
+
+  }
 }

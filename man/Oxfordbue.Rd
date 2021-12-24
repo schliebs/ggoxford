@@ -3,14 +3,14 @@
 \docType{data}
 \name{oxblue}
 \alias{oxblue}
-\title{Arial Narrow font name R variable aliases}
+\title{xx}
 \format{
-length 1 character vector
+
 }
 \usage{
 oxblue
 }
 \description{
-\code{font_an} == "\verb{Arial Narrow}"
+xx
 }
 \keyword{datasets}
